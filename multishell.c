@@ -1,17 +1,8 @@
 /**
  *
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <time.h>
-#include <string.h>
 
+#include "main.h"
 /* these should be the same as multishell.c */
 #define MY_FILE_SIZE 1024
 #define MY_SHARED_FILE_NAME "/sharedlogfile"
@@ -34,8 +25,7 @@ int initmem()
         exit(1);
     }
 
-    addr = mmap(NULL, MY_FILE_SIZE,
-                PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    addr = mmap(NULL, MY_FILE_SIZE,PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     if (addr == NULL){
         perror("mmap:");
         exit(1);
