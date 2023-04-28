@@ -29,16 +29,25 @@ int initmem()
     }
     return 0;
 }
-
+void prompt(){
+    char cwd[256];
+    char prompt [1024] = {'\0'};
+    if (getcwd(cwd, sizeof(cwd)) == NULL) {
+        perror("getcwd");
+        exit(1);
+    }
+    snprintf(prompt,sizeof(prompt),"\033[0;34m%s\033[0m:\033[0;32m%s\033[0m$ ",getenv("USER"),cwd);
+    write(1, prompt , (strlen(prompt)+1));
+}
 
 int main(int argc, char **argv)
 {
-    initmem();
     char inbuf[INBUF_SIZE] = {'\0'};
     int lenbyte;
+    initmem();
     while (1)
     {
-        write(1, "$", 2);
+        prompt();
         if ((lenbyte = read(0, inbuf, 255)) <= 0)
         {
             perror("input");
@@ -52,23 +61,12 @@ int main(int argc, char **argv)
         {
             exit(0);
         }
-        pid_t child_pid = fork();
-        if (child_pid == 0)
-        {
-            argv = split_string(inbuf,argv);
-            exec(argv);
-            exit(0);
-        }
-        else if (child_pid > 0){
-            waitpid(child_pid, NULL, 0);
-        }else{
-            perror("fork");
-            exit(1);
-        }
+        argv = split_string(inbuf,argv);
+        exec(argv);
     }
     // Unmap the shared memory
     munmap(addr, 1024);
 
     // Close the shared memory file
     close(fd);
-} 
+}

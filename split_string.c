@@ -1,6 +1,6 @@
 #include "main.h"
 char** split_string(char* input ,char ** argv) {
-    int num_tokens,i;
+    int num_tokens=0,i=0;
     const char* delim = " \n";
     char* input_copy= strdup(input);
     char* token = strtok(input, delim);;
