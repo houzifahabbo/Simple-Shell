@@ -7,4 +7,3 @@ then run it by typing:
 ```
 ./a.out
 ```
-
