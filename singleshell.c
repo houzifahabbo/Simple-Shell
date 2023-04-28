@@ -14,7 +14,8 @@ int fd = -1;
 
 int initmem()
 {
-    fd = shm_open(MY_SHARED_FILE_NAME, O_RDWR, 0);
+    fd = shm_open(MY_SHARED_FILE_NAME,
+                  O_CREAT | O_RDWR | O_TRUNC, 0666);
     if (fd < 0)
     {
         perror("singleshell.c:fd:line31");
