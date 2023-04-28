@@ -1,17 +1,15 @@
 #include "main.h"
-char** split_string(char* input ,char ** argv) {
-    int num_tokens=0,i=0;
+char** split_string(char* input ,char ** argv , int * argc) {
+    int i=0;
     const char* delim = " \n";
     char* input_copy= strdup(input);
     char* token = strtok(input, delim);;
-    
+    *argc = 0;
     while (token != NULL) {
-        num_tokens ++;
+        (*argc)++;
         token = strtok(NULL, delim);
     }
-
-    argv = malloc((num_tokens + 1) * sizeof(char*));
-
+    argv = malloc((*argc + 1) * sizeof(char*));
     // Tokenize the input string and store each token in argv
     token = strtok(input_copy, delim);
 

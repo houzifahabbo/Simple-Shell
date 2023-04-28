@@ -48,21 +48,16 @@ int main(int argc, char **argv)
     while (1)
     {
         prompt();
-        if ((lenbyte = read(0, inbuf, 255)) <= 0)
-        {
+        if ((lenbyte = read(0, inbuf, 255)) <= 0){
             perror("input");
             exit(1);
-        }
-        else
-        {
+        }else{
             inbuf[lenbyte - 1] = '\0';
         }
-        if (strncmp(inbuf, "exit", 4) == 0)
-        {
-            exit(0);
-        }
-        argv = split_string(inbuf,argv);
-        exec(argv);
+        argv = split_string(inbuf,argv,&argc);
+        argv = replace_variables(argv,argc);
+        if(additional_functions(argv) == 0)
+            exec(argv);
     }
     // Unmap the shared memory
     munmap(addr, 1024);

@@ -11,6 +11,7 @@
 #include <sys/utsname.h>
 
 char *get_path(char * command);
-//char **split_string(char *buf ,char **argv , int len);
-char **split_string(char* input, char ** argv);
+char **split_string(char* input, char ** argv ,int *argc);
 void exec(char **argv);
+int additional_functions(char** argv);
+char ** replace_variables(char **argv,int argc);
