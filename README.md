@@ -7,3 +7,5 @@ then run it by typing:
 ```
 ./a.out
 ```
+
+Code is not working before adding shmopen() function from multishell.c to singleshell.c
