@@ -57,7 +57,7 @@ int main(int argc, char **argv)
         }
         argv = split_string(inbuf,argv,&argc);
         argv = replace_variables(argv,argc);
-        if(additional_functions(argv) == 0)
+        if(additional_functions(argv,argc) == 0)
             exec(argv);
     }
     // Unmap the shared memory

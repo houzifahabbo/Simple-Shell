@@ -15,5 +15,5 @@
 char *get_path(char * command);
 char **split_string(char* input, char ** argv ,int *argc);
 void exec(char **argv);
-int additional_functions(char** argv);
+int additional_functions(char** argv, int argc);
 char ** replace_variables(char **argv,int argc);
