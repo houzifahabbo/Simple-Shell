@@ -49,7 +49,7 @@ int findreplace(char **argv,int argc) {
         exit(1);
     }
 }
-void cd(char *argv){
+void cd(char **argv){
   if (argv[1] == NULL) {
     fprintf(stderr, "lsh: expected argument to \"cd\"\n");
   } else {
