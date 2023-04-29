@@ -14,9 +14,7 @@ int fd = -1;
 
 int initmem()
 {
-fd = shm_open(MY_SHARED_FILE_NAME,
-                  O_CREAT | O_RDWR | O_TRUNC, 0666);    
-    //fd = shm_open(MY_SHARED_FILE_NAME, O_RDWR, 0); 
+    fd = shm_open(MY_SHARED_FILE_NAME, O_RDWR, 0);
     if (fd < 0)
     {
         perror("singleshell.c:fd:line31");
@@ -89,7 +87,7 @@ int main(int argc, char **argv)
         else
         {
             inbuf[lenbyte - 1] = '\0';
-        }     
+         }     
         argv = split_string(inbuf, argv, &argc);
         argv = replace_variables(argv, argc);
         int x = additional_functions(argv,argc,&command_pid);
