@@ -1,5 +1,5 @@
 #include "main.h"
-void exec(char **argv){
+pid_t exec(char **argv){
     char *command = NULL ,*full_command_path = NULL;
     pid_t child_pid = fork();
     if (child_pid == 0)
@@ -13,6 +13,7 @@ void exec(char **argv){
     }
     else if (child_pid > 0){
         waitpid(child_pid, NULL, 0);
+        return child_pid;
     }else{
         perror("fork");
         exit(1);

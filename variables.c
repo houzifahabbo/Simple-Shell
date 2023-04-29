@@ -6,11 +6,12 @@ char *variables[] = {
   "USER",
   "HOME",
 };
+
 char *variables_str[] = {
   "$HOME",
   "$PATH",
   "$USER",
-  "~"
+  "~",
 };
 char *(*variable) (const char *) = &getenv;
 

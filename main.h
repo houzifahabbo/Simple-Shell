@@ -12,6 +12,6 @@
 
 char *get_path(char * command);
 char **split_string(char* input, char ** argv ,int *argc);
-void exec(char **argv);
-int additional_functions(char** argv);
+pid_t exec(char **argv);
+int additional_functions(char** argv , int argc,int * command_pid);
 char ** replace_variables(char **argv,int argc);

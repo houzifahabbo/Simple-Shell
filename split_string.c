@@ -20,6 +20,7 @@ char** split_string(char* input ,char ** argv , int * argc) {
     }
     argv[i] = NULL; // Set the last element of argv to NULL as a sentinel value
 
-    free(input_copy); // Free the memory allocated for the input copy
+    free(input_copy);
+    free(token);
     return argv;
 }

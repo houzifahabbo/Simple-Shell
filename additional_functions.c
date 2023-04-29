@@ -16,7 +16,7 @@ void cd(char **argv){
     }
   }
 }
-int help(char **args)
+int help()
 {
   printf("Type program names and arguments, and hit enter.\n");
   printf("The following are built in:\n");
@@ -27,7 +27,7 @@ int help(char **args)
   return 1;
 }
 
-int additional_functions(char** argv)
+int additional_functions(char** argv, int argc, int * command_pid)
 {
     int function_index = 0;
     for (int i = 0; i < additional_functions_str_size; i++) {
@@ -36,17 +36,18 @@ int additional_functions(char** argv)
             break;
         }
     }
+    *command_pid = getpid();
     switch (function_index) {
-        case 1:
-            help(argv);
-            return 1;
-        case 2:
-            cd(argv);
-            return 1;
-        case 3:
-            exit(0);
-        default:
-            break;
+      case 1:
+        help(argv);
+        return 1;
+      case 2:
+         cd(argv);
+        return 1;
+      case 3:
+         return 2;
+      default:
+        break;
     }
     return 0;
 }
