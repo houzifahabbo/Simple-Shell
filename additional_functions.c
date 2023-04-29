@@ -87,7 +87,10 @@ int additional_functions(char** argv, int argc, int * command_pid)
             cd(argv);
             return 1;
         case 3:
-            exit(0);
+            return 2;
+        case 4:
+            findreplace(argv,argc);
+            return 1;
         default:
             break;
     }
