@@ -1,4 +1,4 @@
-//Permutation of all libraries to this file so that project easier to read
+//Permutation of all libraries to this file so that project is easy to read
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,8 +12,8 @@
 #include <string.h>
 #include <sys/utsname.h>
 
-char *get_path(char * command);
-char **split_string(char* input, char ** argv ,int *argc);
+char *get_path(char *command);
+char **split_string(char *input, char **argv, int *argc);
+char **replace_variables(char **argv, int argc);
+int additional_functions(char **argv, int argc, int *command_pid);
 pid_t exec(char **argv);
-int additional_functions(char** argv , int argc,int * command_pid);
-char ** replace_variables(char **argv,int argc);
