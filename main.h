@@ -17,3 +17,6 @@ char **split_string(char* input, char ** argv ,int *argc);
 void exec(char **argv);
 int additional_functions(char** argv);
 char ** replace_variables(char **argv,int argc);
+int takvim ();
+int file_info ();
+int hesapla();
