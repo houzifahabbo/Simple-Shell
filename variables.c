@@ -1,3 +1,12 @@
+/*************************************************************************************
+ *
+ *    File: variables.c
+ * Project: system-programming-project-1
+ * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Purpose: 
+ *
+ *************************************************************************************/
+
 #include "main.h"
 
 char *variables[] = {
@@ -6,11 +15,12 @@ char *variables[] = {
   "USER",
   "HOME",
 };
+
 char *variables_str[] = {
   "$HOME",
   "$PATH",
   "$USER",
-  "~"
+  "~",
 };
 char *(*variable) (const char *) = &getenv;
 
