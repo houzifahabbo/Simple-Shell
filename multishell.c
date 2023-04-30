@@ -1,8 +1,14 @@
-/**
+/*************************************************************************************
  *
- */
+ *    File: multishell.c
+ * Project: system-programming-project-1
+ * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Purpose: 
+ *
+ *************************************************************************************/
 
 #include "main.h"
+
 /* these should be the same as multishell.c */
 #define MY_FILE_SIZE 1024
 #define MY_SHARED_FILE_NAME "/sharedlogfile"
@@ -12,8 +18,7 @@
 char *addr = NULL; /*mmap addres*/
 int fd = -1;       /*fd for shared file object*/
 
-int initmem()
-{
+int initmem(){
     fd = shm_open(MY_SHARED_FILE_NAME,
                   O_CREAT | O_RDWR | O_TRUNC, 0666);
     if (fd < 0){
@@ -36,13 +41,13 @@ int initmem()
 /**
  * todo, you can create multiple function, variables, etc..
  * */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
 
     initmem();
 
     /*unlink mmap*/
     munmap(addr, 1024);
+
     /* close the shared memory file*/
     close(fd);
 

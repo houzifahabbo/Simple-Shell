@@ -1,3 +1,12 @@
+/*************************************************************************************
+ *
+ *    File: variables.c
+ * Project: system-programming-project-1
+ * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Purpose: 
+ *
+ *************************************************************************************/
+
 #include "main.h"
 
 char *variables[] = {
