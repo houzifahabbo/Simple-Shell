@@ -1,4 +1,11 @@
-//Permutation of all libraries to this file so that project is easy to read
+/*************************************************************************************
+ *
+ *    File: main.h
+ * Project: system-programing-project-1
+ * Authors: Hozaifah, Ola Helany, Nour Chami, Muslim Umalatov
+ * Purpose: Permutation of all libraries to this file so that project is easy to read
+ *
+ *************************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
