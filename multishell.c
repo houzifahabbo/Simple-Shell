@@ -29,25 +29,21 @@ int initmem()
         exit(1);
     }
 
-    addr = mmap(NULL, MY_FILE_SIZE,PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    if (addr == NULL){
+    addr = mmap(NULL, MY_FILE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (addr == NULL) {
         perror("mmap:");
         exit(1);
     }
     return 0;
 }
 
-/**
- * todo, you can create multiple function, variables, etc..
- * */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     initmem();
 
     /* unlink mmap */
     munmap(addr, 1024);
 
-    /* close the shared memory file*/
+    /* close the shared memory file */
     close(fd);
 
     return 0;

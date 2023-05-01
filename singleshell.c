@@ -3,7 +3,6 @@
  * Project: system-programming-project-1
  * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
  * Purpose: 
- *
  */
 
 #include "main.h"
@@ -19,7 +18,6 @@ int fd = -1;
 int initmem()
 {
     fd = shm_open(MY_SHARED_FILE_NAME, O_RDWR, 0);
-
     if (fd < 0) {
         perror("singleshell.c:fd:line31");
         exit(1);
@@ -29,15 +27,12 @@ int initmem()
         close(fd);
         exit(1);
     }
-
     addr = mmap(NULL, MY_FILE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-
-    if (addr == NULL){
+    if (addr == NULL) {
         perror("singleshell.c:mmap:");
         close(fd);
         exit(1);
     }
-
     return 0;
 }
 
@@ -50,9 +45,11 @@ void prompt()
         perror("getcwd");
         exit(1);
     }
-    snprintf(prompt, sizeof(prompt),
-        "\033[0;34m%s\033[0m:\033[0;32m%s\033[0m$ ", getenv("USER"), cwd);
-    write(1, prompt, (strlen(prompt)+1));
+
+    snprintf(prompt, sizeof(prompt), 
+            "\033[0;34m%s\033[0m:\033[0;32m%s\033[0m$ ",
+            getenv("USER"), cwd);
+    write(1, prompt , (strlen(prompt)+1));
 }
 
 void log_message(char *message, pid_t *command_pid, int flag)
@@ -68,17 +65,17 @@ void log_message(char *message, pid_t *command_pid, int flag)
     strftime(formated_start_time, sizeof(formated_start_time),
             "%d-%m-%Y %H:%M:%S", timeinfo);
     if (flag == 1)
-        bytes_written = snprintf(buffer, INBUF_SIZE, 
+        bytes_written = snprintf(buffer, INBUF_SIZE,
                                 "Process ID: %d\nParent Process ID: %d\nStart Time: %s\n",
                                 pid, parent_pid, formated_start_time);
     else if (flag == 2)
         bytes_written = snprintf(buffer, INBUF_SIZE,
                                 "Process ID: %d\tCommand Process ID: %d\t%s\nEnd Time: %s\n",
-                                pid, *command_pid,message, formated_start_time);
+                                pid, *command_pid, message, formated_start_time);
     else
         bytes_written = snprintf(buffer, INBUF_SIZE,
                                 "Process ID: %d\tCommand Process ID: %d\t%s\n",
-                                pid, *command_pid,message);
+                                pid, *command_pid, message);
 
     if (bytes_written >= remaining_space) {
         fprintf(stderr, "Log message exceeds shared memory size. Unable to write.\n");
@@ -97,29 +94,32 @@ int main(int argc, char **argv)
 
     while (1) {
         prompt();
+
         if ((lenbyte = read(0, inbuf, INBUF_SIZE - 1)) <= 0) {
             perror("input");
             exit(1);
-        } else {
-            inbuf[lenbyte - 1] = '\0';
-        }     
+        } else
+            inbuf[lenbyte - 1] = '\0'; 
+
         argv = split_string(inbuf, argv, &argc);
         argv = replace_variables(argv, argc);
         int x = additional_functions(argv, argc, &command_pid);
+
         if (x == 0)
             command_pid = exec(argv);
-        else if (x == 2) {
+        else if(x == 2) {
             log_message(inbuf, &command_pid, 2);
             free(argv);
             break;
         }
+
         log_message(inbuf, &command_pid, 0);
         free(argv);
     }
 
-    /* Unmap the shared memory */ 
+    /* Unmap the shared memory */
     munmap(addr, MY_FILE_SIZE);
-
+    
     /* Close the shared memory file */
     close(fd);
     

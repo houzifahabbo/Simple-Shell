@@ -19,8 +19,9 @@ char **split_string(char *input, char **argv, int *argc)
         (*argc)++;
         token = strtok(NULL, delim);
     }
-
+    
     argv = malloc((*argc + 1) * sizeof(char*));
+
     /* Tokenize the input string and store each token in argv */
     token = strtok(input_copy, delim);
 
@@ -29,6 +30,7 @@ char **split_string(char *input, char **argv, int *argc)
         i++;
         token = strtok(NULL, delim);
     }
+
     argv[i] = NULL; /* Set the last element of argv to NULL as a sentinel value */
 
     free(input_copy);

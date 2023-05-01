@@ -10,6 +10,7 @@
 char *get_path(char *command)
 {
     char *path = getenv("PATH");
+
     if (path == NULL) 
         return NULL;
 
@@ -21,6 +22,7 @@ char *get_path(char *command)
         return NULL;
 
     char *path_token = strtok(path_copy, delimiter);
+    
     while (path_token != NULL) {
         const size_t directory_length = strlen(path_token);
         const size_t file_path_length = directory_length + command_length + 2;
