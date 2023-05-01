@@ -1,7 +1,7 @@
 /*
  *    File: main.h
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Permutation of all libraries to this file so that project is easy to read
  */
 
@@ -33,4 +33,5 @@ void calender(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
 void count_word(int argc, char **argv);
 int network_info(int argc, char **argv);
+pid_t findreplace(char **argv, int argc);
 
