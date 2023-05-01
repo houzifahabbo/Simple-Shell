@@ -1,7 +1,7 @@
 /*
  *    File: additional_functions.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
  * Purpose: 
  */
 
@@ -15,12 +15,76 @@ const char *additional_functions_str[] = {
   "calender",
   "fileinfo",
   "findreplace",
-  "history"
+  "history",
+  "count"
 };
 
 const int additional_functions_str_size = (sizeof(additional_functions_str) / sizeof(additional_functions_str[0]));
 
+pid_t findreplace(char **argv, int argc)
+{
+  
+    if (argc != 4) {
+        printf("Usage: findreplace <search_string> <replacement_string> <input_file>\n");
+        return 0;
+    }else{
+        pid_t child_pid = fork();
+        if (child_pid == 0) {
 
+
+        char *search_string = argv[1];
+        char *replacement_string = argv[2];
+        char *input_file_name = argv[3];
+        FILE *input_file = fopen(input_file_name, "r");
+
+        if (!input_file) {
+            printf("Error: cannot open input file '%s'\n", input_file_name);
+            return 0;
+        }
+
+        char temp_file_name[] = "temp.txt"; /* geçici olarak açılacak kelimeler değişince silinecek */
+        FILE *temp_file = fopen(temp_file_name, "w");
+
+        if (!temp_file) {
+            printf("Error: cannot open temporary file '%s'\n", temp_file_name);
+            return 0;
+        }
+
+        char line[1000];
+
+        while (fgets(line, 1000, input_file)) {
+            char *pos = strstr(line, search_string);
+
+            while (pos) {
+                int offset = pos - line;
+                memmove(pos + strlen(replacement_string), pos + strlen(search_string), strlen(pos) - strlen(search_string) + 1);
+                memcpy(pos, replacement_string, strlen(replacement_string));
+                pos = strstr(line + offset + strlen(replacement_string), search_string);
+            }
+            fputs(line, temp_file);
+        }
+        fclose(input_file);
+        fclose(temp_file);
+
+        if (remove(input_file_name) != 0) {
+            printf("Error: cannot delete input file '%s'\n", input_file_name);
+            return 0;
+        }
+        if (rename(temp_file_name, input_file_name) != 0) {
+            printf("Error: cannot rename temporary file '%s' to '%s'\n", 
+                temp_file_name, input_file_name);
+            return 0;
+        }
+        exit(0);
+        } else if (child_pid > 0) {
+            waitpid(child_pid, NULL, 0);
+            return child_pid;
+        } else {
+            perror("fork");
+            exit(1);
+        }
+    }
+}
 
 
 /* file info */  
@@ -48,10 +112,9 @@ int file_info(char **argv)
         }
 }
 
-
 void hesapla(char **argv)
 {
-    double num1 = atoi(argv[1]), num2 =atoi(argv[3]);
+    double num1 = atoi(argv[1]), num2 = atoi(argv[3]);
     char op = argv[2][0];
 
     /*printf("Enter an arithmetic expression: "); */
@@ -97,7 +160,7 @@ void help(char **argv)
                 printf("  %s\n", additional_functions_str[i]);
 
             printf("Use the man command for information on other programs.\n");
-    }else{
+    } else {
         int function_index = -1;
         for (int i = 0; i < additional_functions_str_size; i++)
             if (strcmp(argv[1], additional_functions_str[i]) == 0) {
@@ -112,32 +175,122 @@ void help(char **argv)
             case 2:
                 break;
             case 3:    /* hesapla */      
-                printf("Eng: Solve arithmetic operations for two number\n");
-                printf("Tur: Verilen iki sayinin istenilen aritmetik islemini yapar\n");
+                printf("Solve arithmetic operations for two number\n");
+                printf("Verilen iki sayinin istenilen aritmetik islemini yapar\n");
                 break;
-            case 4:     /* calender */          
-                printf("Eng: Gives the calendar for the month in the given year\n");
-                printf("Tur: Verilen yildaki ayin takvimini verir\n");
+            case 4:     /* calendar */          
+                printf("Gives the calendar for the month in the given year\n");
+                printf("Verilen yildaki ayin takvimini verir\n");
                 break;
             case 5:   /* file_info */    
-                printf("Eng: Gives the infomation of the given file\n");
-                printf("Tur: Veilen dosyanin bilgilerini verir\n");
+                printf("Gives the infomation of the given file\n");
+                printf("Verilen dosyanin bilgilerini verir\n");
                 break;    
             case 6:   /* findreplace */  
-                printf("Eng: Replace the first given word with the second word\n ");
-                printf("Tur: Verilen ilk_kelimeyi ikinci_kelime ile degistirir\n\n");
-                printf("Eng: To run this code you, you should write findreplace first_word second_word test.txt\n");
-                printf("Tur: Kodu calistirmak icin findreplace ilk_kelime ikinci_kelime test.txt yazman gerekiyor.\n");
+                printf("Replace the first given word with the second word\n ");
+                printf("Verilen ilk kelimeyi ikinci kelime ile degistirir\n");
                 break;   
             case 7:
                 printf("sgsdg\n");
                 printf("dsgsdg\n");
-                break;  
+                break;
+            case 8:   /* count */
+                printf("Counting word that occurs in the file\n");
+                printf("Verilen kelimeyi dosyada kac kez ciktigini sayar\n");
+                printf("Calistirmak icin sunu yazin: count <filename> <word> ");
+                break;
+            case 9:   /* network */
+                printf("Shows information about network\n");
+                printf("To display information just write network\n");
+                break;
             default:
                 break;
         }
     }
 }
+
+#define MAX_WORD_LEN 100
+
+void count_word(int argc, char *argv[]) {
+    if (argc != 3) {
+        printf("Usage: %s <filename> <word>\n", argv[0]);
+        exit(1);
+    }
+
+    /* First and second word in terminal as filename and word */
+    const char* filename = argv[1];
+    const char* word = argv[2];
+
+    int count = 0;
+    char buffer[MAX_WORD_LEN];
+
+    /* Opening file just for reading */
+    FILE* fp = fopen(filename, "r");
+
+    /* Check for error */
+    if (fp == NULL) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    /* Counting words */
+    while (fscanf(fp, "%s", buffer) != EOF) {
+        if (strcmp(buffer, word) == 0) {
+            count++;
+        }
+    }
+
+    /* Printing message to shell */
+
+    printf("The word '%s' occurs %d times in '%s'\n", argv[2], count, argv[1]);
+
+    fclose(fp);
+}
+
+#ifndef NI_MAXHOST
+#define NI_MAXHOST 1025
+#endif
+
+#ifndef NI_NUMERICHOST
+#define NI_NUMERICHOST 2
+#endif
+
+int network_info(int argc, char *argv[]) {
+    struct ifaddrs *ifaddr, *ifa;
+    int family, s;
+    char host[NI_MAXHOST];
+
+    if (getifaddrs(&ifaddr) == -1) {
+        perror("getifaddrs");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Interface\tAddress\n");
+
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+        if (ifa->ifa_addr == NULL) {
+            continue;
+        }
+
+        family = ifa->ifa_addr->sa_family;
+
+        if (family == AF_INET || family == AF_INET6) {
+            s = getnameinfo(ifa->ifa_addr, (family == AF_INET) ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6),
+                    host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
+            if (s != 0) {
+                printf("getnameinfo() failed: %s\n", gai_strerror(s));
+                exit(EXIT_FAILURE);
+            }
+
+            printf("%s:\t%s\n", ifa->ifa_name, host);
+        }
+    }
+
+    freeifaddrs(ifaddr);
+    exit(EXIT_SUCCESS);
+}
+
 
 int additional_functions(char **argv, int argc, int *command_pid) {
     int function_index = -1;
@@ -169,7 +322,13 @@ int additional_functions(char **argv, int argc, int *command_pid) {
             findreplace(argv,argc);
             return 1;
         case 7:
-            return 2;  
+            return 2; 
+        case 8:
+            count_word(argc, argv);
+            return 1;
+        case 9:
+            network_info(argc, argv);
+            return 1;
         default:
             break;
     }
