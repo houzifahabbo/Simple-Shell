@@ -3,7 +3,7 @@ ilk once metindeki kelimeyi buluyor ondan sonra degistiriyor.*/
 
 #include "main.h"
 
-pid_t findreplace(char **argv, int argc)
+pid_t findreplace(char **argv, int argc) 
 {
   
     if (argc != 4) {
