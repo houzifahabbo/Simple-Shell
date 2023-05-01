@@ -7,7 +7,8 @@
 #define NI_NUMERICHOST 2
 #endif
 
-void network_info(int argc, char *argv[]) {
+void network_info(int argc, char *argv[]) 
+{
     struct ifaddrs *ifaddr, *ifa;
     int family, s;
     char host[NI_MAXHOST];
