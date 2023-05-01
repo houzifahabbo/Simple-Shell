@@ -25,7 +25,7 @@ pid_t findreplace(char **argv, int argc)
 
         char temp_file_name[] = "temp.txt"; 
         FILE *temp_file = fopen(temp_file_name, "w");
-        /* gecici olarak acılacak kelimeler degisince silinecek */
+        /* gecici olarak acilacak kelimeler degisince silinecek */
         if (!temp_file) {
             printf("Error: cannot open temporary file '%s'\n", temp_file_name);
             return 0;
