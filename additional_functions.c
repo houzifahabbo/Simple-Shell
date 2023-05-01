@@ -121,43 +121,6 @@ void display_help(char **argv) {
     }
 }
 
-#define MAX_WORD_LEN 100
-
-void count_word(int argc, char *argv[]) {
-    if (argc != 3) {
-        printf("Usage: %s <filename> <word>\n", argv[0]);
-        exit(1);
-    }
-
-    /* First and second word in terminal as filename and word */
-    const char* filename = argv[1];
-    const char* word = argv[2];
-
-    int count = 0;
-    char buffer[MAX_WORD_LEN];
-
-    /* Opening file just for reading */
-    FILE* fp = fopen(filename, "r");
-
-    /* Check for error */
-    if (fp == NULL) {
-        perror("Error opening file");
-        exit(1);
-    }
-
-    /* Counting words */
-    while (fscanf(fp, "%s", buffer) != EOF) {
-        if (strcmp(buffer, word) == 0) {
-            count++;
-        }
-    }
-
-    /* Printing message to shell */
-
-    printf("The word '%s' occurs %d times in '%s'\n", argv[2], count, argv[1]);
-
-    fclose(fp);
-}
 
 #ifndef NI_MAXHOST
 #define NI_MAXHOST 1025
@@ -241,52 +204,6 @@ void count_word(int argc, char *argv[]) {
 
     fclose(fp);
 }
-
-#ifndef NI_MAXHOST
-#define NI_MAXHOST 1025
-#endif
-
-#ifndef NI_NUMERICHOST
-#define NI_NUMERICHOST 2
-#endif
-
-int network_info(int argc, char *argv[]) {
-    struct ifaddrs *ifaddr, *ifa;
-    int family, s;
-    char host[NI_MAXHOST];
-
-    if (getifaddrs(&ifaddr) == -1) {
-        perror("getifaddrs");
-        exit(EXIT_FAILURE);
-    }
-
-    printf("Interface\tAddress\n");
-
-    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
-        if (ifa->ifa_addr == NULL) {
-            continue;
-        }
-
-        family = ifa->ifa_addr->sa_family;
-
-        if (family == AF_INET || family == AF_INET6) {
-            s = getnameinfo(ifa->ifa_addr, (family == AF_INET) ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6),
-                    host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-
-            if (s != 0) {
-                printf("getnameinfo() failed: %s\n", gai_strerror(s));
-                exit(EXIT_FAILURE);
-            }
-
-            printf("%s:\t%s\n", ifa->ifa_name, host);
-        }
-    }
-
-    freeifaddrs(ifaddr);
-    exit(EXIT_SUCCESS);
-}
-
-
 
 /* Function to handle additional functions */
 int additional_functions(char **argv, int argc, int *command_pid) {

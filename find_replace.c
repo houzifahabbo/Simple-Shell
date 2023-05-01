@@ -1,6 +1,6 @@
 #include "main.h"
 
-pid_t findreplace(char **argv, int argc)
+pid_t find_replace(char **argv, int argc)
 {
   
     if (argc != 4) {

@@ -33,5 +33,5 @@ void calendar(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
 void count_word(int argc, char **argv);
 int network_info(int argc, char **argv);
-pid_t findreplace(char **argv, int argc);
+pid_t find_replace(char **argv, int argc);
 
