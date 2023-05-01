@@ -1,17 +1,25 @@
+/*
+ *    File: find_replace.c
+ * Project: system-programming-project-1
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Purpose: findreplace amaci bir metinde kelimeler degistirmek istiyorsak 
+ *          ilk once metindeki kelimeyi buluyor ondan sonra degistiriyor.
+ */
+
+
 #include "main.h"
 
 pid_t find_replace(char **argv, int argc)
 {
-  
     if (argc != 4) {
-        printf("Error: Yanlis bisey yazdin kodu dogru calismasi icin help findreplace ten ogrenebilirsiniz. \n");
+        printf("Error: Yanlis bisey yazdin, kodu dogru calismasi icin help findreplace ten ogrenebilirsiniz. \n");
         return 0;
-        /*Girdi parametre sayisinin dogru olup olmadigini kontrol ediyor. 
-        Eger dogru degilse, kullaniciya dogru kullanimi gosterilerek fonksiyondan cikiyor*/
-    }else{
+        /*Girdi parametre sayisinin dogru olup olmadigini kontrol ediyor.  */
+        /* Eger dogru degilse, kullaniciya dogru kullanimi gosterilerek fonksiyondan cikiyor */
+    } else {
         pid_t child_pid = fork(); 
         if (child_pid == 0) {
-        /*Eger girdi parametre sayisi dogruy ise, bir child surec olusturuluyor*/
+        /* Eger girdi parametre sayisi dogru ise, bir child surec olusturuluyor */
 
         char *search_string = argv[1];
         char *replacement_string = argv[2];

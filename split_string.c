@@ -1,7 +1,7 @@
 /*
  * File: split_string.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Contains a function to split a string into an array of tokens
  */
 

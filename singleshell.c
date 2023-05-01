@@ -1,7 +1,7 @@
 /*
  * File: singleshell.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Implements a single-shell command-line interface
  * Note: I used readline library just for handling navigation, command history, and code completion
  */
