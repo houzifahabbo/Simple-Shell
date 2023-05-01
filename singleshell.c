@@ -1,7 +1,10 @@
-/**
- * header
- *
+/*
+ *    File: singleshell.c
+ * Project: system-programming-project-1
+ * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Purpose: 
  */
+
 #include "main.h"
 #define INBUF_SIZE 256
 
@@ -15,13 +18,17 @@ int fd = -1;
 int initmem()
 {
     fd = shm_open(MY_SHARED_FILE_NAME, O_RDWR, 0);
-    if (fd < 0){
+    if (fd < 0) {
         perror("singleshell.c:fd:line31");
         exit(1);
     }
-    addr = mmap(NULL, MY_FILE_SIZE,
-                PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    if (addr == NULL){
+    if (ftruncate(fd, MY_FILE_SIZE) == -1) {
+        perror("singleshell.c:ftruncate:");
+        close(fd);
+        exit(1);
+    }
+    addr = mmap(NULL, MY_FILE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (addr == NULL) {
         perror("singleshell.c:mmap:");
         close(fd);
         exit(1);
@@ -36,12 +43,11 @@ char* prompt(){
         perror("getcwd");
         exit(1);
     }
-    //snprintf(prompt, sizeof(prompt), "%s:%s$ ", getenv("USER"), cwd);
-
-    snprintf(prompt, sizeof(prompt), "\033[0;36m%s\033[0;37m:\033[0;32m%s\033[0;37m$ \033[0m", getenv("USER"), cwd);
+    snprintf(prompt, sizeof(prompt),
+            "\033[0;36m%s\033[0;37m:\033[0;32m%s\033[0;37m$ \033[0m",
+            getenv("USER"), cwd);
     return strdup(prompt);
 }
-
 char* history(char **argv, char **history_str, int history_str_size) {
     if (argv[1] == NULL) {
         for (int i = 0; i < history_str_size; i++) {
@@ -60,8 +66,6 @@ char* history(char **argv, char **history_str, int history_str_size) {
         }
     }
     return NULL;
-}
-
 
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index){
     char buffer[INBUF_SIZE] = {'\0'};
@@ -87,6 +91,7 @@ void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index
         }
         strcat(buffer,"\n");
     }
+
     if (bytes_written >= remaining_space) {
         fprintf(stderr, "Log message exceeds shared memory size. Unable to write.\n");
         return;
@@ -135,8 +140,9 @@ int main(int argc, char **argv)
             continue;
         }
         argv = replace_variables(argv, argc);
-        int x = additional_functions(argv,argc,&command_pid,history_str,history_str_size);
-        if (x == 0 )
+        int x = additional_functions(argv, argc, &command_pid);
+
+        if (x == 0)
             command_pid = exec(argv);
         else if(x==2){
             flag = 1;
@@ -154,9 +160,11 @@ int main(int argc, char **argv)
         free(argv);
         free(inbuf);
     }
-    // Unmap the shared memory
+
+    /* Unmap the shared memory */
     munmap(addr, MY_FILE_SIZE);
-    // Close the shared memory file
+    
+    /* Close the shared memory file */
     close(fd);
     
     exit(0);
