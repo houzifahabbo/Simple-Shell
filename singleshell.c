@@ -103,8 +103,7 @@ int main(int argc, char **argv)
     initmem();
     log_message(NULL, &command_pid, 1, argc, index, addr);
     
-    while (1)
-    {
+    while (1) {
         command_pid = getpid();
         char *prompt_txt = prompt();
 
