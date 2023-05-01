@@ -1,10 +1,13 @@
+/*findreplace amaci bir metinde kelimeler degistirmek istiyorsak 
+ilk once metindeki kelimeyi buluyor ondan sonra degistiriyor.*/
+
 #include "main.h"
 
 pid_t findreplace(char **argv, int argc)
 {
   
     if (argc != 4) {
-        printf("Error: Yanlis bisey yazdin kodu dogru calismasi icin help findreplace ten ogrenebilirsiniz. \n");
+        printf("Error: Yanlis bisey yazdin, kodu dogru calismasi icin help findreplace ten ogrenebilirsiniz. \n");
         return 0;
         /*Girdi parametre sayisinin dogru olup olmadigini kontrol ediyor. 
         Eger dogru degilse, kullaniciya dogru kullanimi gosterilerek fonksiyondan cikiyor*/
