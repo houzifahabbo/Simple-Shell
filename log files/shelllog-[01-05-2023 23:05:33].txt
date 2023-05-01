@@ -1,0 +1,16 @@
+Process ID: 140782	Parent Process ID: 140780	Start Time: 01-05-2023 23:01:41
+Process ID: 140783	Parent Process ID: 140781	Start Time: 01-05-2023 23:01:41
+Process ID: 140783	Command Process ID: 140783	help networkinfo 
+Process ID: 140783	Command Process ID: 140783	cd 
+Process ID: 140783	Command Process ID: 140783	cd /home/houzifa 
+Process ID: 140783	Command Process ID: 140812	ls -al 
+Process ID: 140783	Command Process ID: 140814	pwd 
+Process ID: 140783	Command Process ID: 140783	cd Desktop/ 
+Process ID: 140783	Command Process ID: 140816	cat test.h 
+Process ID: 140783	Command Process ID: 140817	cat test.c 
+Process ID: 140783	Command Process ID: 140783	cd system-programing-project-1 
+Process ID: 140783	Command Process ID: 140783	cd .. 
+Process ID: 140783	Command Process ID: 140783	cd system-programing-project-1 
+Process ID: 140783	Command Process ID: 140827	findreplace hi hello test.txt 
+Process ID: 140783	Command Process ID: 140832	cat test.txt 
+Process ID: 140782	Command Process ID: 140782	cd /home/houzifa 

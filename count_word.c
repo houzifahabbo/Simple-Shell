@@ -1,3 +1,9 @@
+/*
+ * File: count_word.c
+ * Project: system-programming-project-1
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Purpose: Contains a function to count the occurrences of a word in a file
+ */
 #include "main.h"
 #define MAX_WORD_LEN 100
 

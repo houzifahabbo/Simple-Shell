@@ -1,8 +1,8 @@
 /*
- *    File: additional_functions.c
+ *    File: calendar.c
  * Project: system-programming-project-1
  * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
- * Purpose: Contains additional functions for the command-line interface
+ * Purpose: Contains a function to print a calendar for a given month and year
  */
 
 #include "main.h"

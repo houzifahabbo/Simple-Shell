@@ -104,13 +104,13 @@ void display_help(char **argv) {
         } else if (function_index == 3) { /* hesapla */
             printf("Eng: Solve arithmetic operations for two number\n");
             printf("Tur: Verilen iki sayinin istenilen aritmetik islemini yapar\n");
-                printf("calistirmak icin calc sonra yapmak istediginz islemi yaziniz\n");
-                printf("ornek: calc 1 + 3\n");
+            printf("calistirmak icin calc sonra yapmak istediginz islemi yaziniz\n");
+            printf("ornek: calc 1 + 3\n");
         } else if (function_index == 4) { /* calendar */
             printf("Eng: Gives the calendar for the month in the given year\n");
             printf("Tur: Verilen yildaki ayin takvimini verir\n");
-                printf("bir ay'in takvimi almak icin calender sonra istediginiz ay yaziniz ay'dan sonra istediginiz yil giriniz\n");
-                printf("ornek : calender 4 2023 \n ");
+            printf("bir ay'in takvimi almak icin calender sonra istediginiz ay yaziniz ay'dan sonra istediginiz yil giriniz\n");
+            printf("ornek : calender 4 2023 \n ");
         } else if (function_index == 5) { /* file_info */
             printf("Eng: Gives the information of the given file\n");
             printf("Tur: Verilen dosyanin bilgilerini verir\n");

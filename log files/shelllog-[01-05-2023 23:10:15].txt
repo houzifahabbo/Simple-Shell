@@ -1,0 +1,16 @@
+Process ID: 141063	Parent Process ID: 141062	Start Time: 01-05-2023 23:06:42
+Process ID: 141064	Parent Process ID: 141061	Start Time: 01-05-2023 23:06:42
+Process ID: 141064	Command Process ID: 141064	cd 
+Process ID: 141064	Command Process ID: 141064	cd /home/houzifa 
+Process ID: 141064	Command Process ID: 141064	cd Desktop/ 
+Process ID: 141064	Command Process ID: 141064	cd / 
+Process ID: 141064	Command Process ID: 141064	cd /home/houzifa/Desktop/ 
+Process ID: 141064	Command Process ID: 141125	echo houzifa 
+Process ID: 141064	Command Process ID: 141064	cd sys 
+Process ID: 141064	Command Process ID: 141064	cd system-programing-project-1 
+Process ID: 141064	Command Process ID: 141127	ls 
+Process ID: 141064	Command Process ID: 141135	cat test.h 
+Process ID: 141064	Command Process ID: 141136	cat test.c 
+Process ID: 141064	Command Process ID: 141137	cat test.txt 
+Process ID: 141064	Command Process ID: 141139	findreplace hello hi test.txt 
+Process ID: 141064	Command Process ID: 141141	cat test.txt 

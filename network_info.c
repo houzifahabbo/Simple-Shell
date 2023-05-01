@@ -1,3 +1,9 @@
+/*
+ * File: network_info.c
+ * Project: system-programming-project-1
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Purpose: Retrieve and display network interface information
+ */
 #include "main.h"
 #ifndef NI_MAXHOST
 #define NI_MAXHOST 1025
@@ -6,7 +12,13 @@
 #ifndef NI_NUMERICHOST
 #define NI_NUMERICHOST 2
 #endif
-
+/*
+    Function: network_info
+    Retrieves and displays network interface information
+    argc: the number of command-line arguments
+    argv: an array of command-line arguments
+    returns: void
+*/
 void network_info(int argc, char *argv[]) {
     struct ifaddrs *ifaddr, *ifa;
     int family, s;
