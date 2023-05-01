@@ -1,7 +1,7 @@
 /*
  *  File: variables.c
  *  Project: system-programming-project-1
- *  Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ *  Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  *  Purpose: Defines variables and functions related to variable replacement
  */
 

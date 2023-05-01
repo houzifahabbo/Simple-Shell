@@ -1,7 +1,7 @@
 /*
  * File: multishell.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Implements a multi-shell command-line interface
  */
 

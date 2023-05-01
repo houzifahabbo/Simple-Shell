@@ -1,7 +1,7 @@
 /*
  * File: get_path.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
+ * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Retrieves the full path of a command executable
  */
 

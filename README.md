@@ -13,8 +13,7 @@ then run it by typing:
 ```
 io order to compile multishell you have to install xterm by using this command:
 ```
-sudo apt-get install xterm
-
+sudo apt-get install xterm./
 ```
 then compile it:
 ```
