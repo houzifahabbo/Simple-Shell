@@ -3,13 +3,13 @@
  * Project: system-programming-project-1
  * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Implements a single-shell command-line interface
- * Note: I used readline library just for handling navigation, command history, and code completion
+ * Note: We used readline library just for handling navigation, command history, and code completion
  * Sources: 
  *          - https://tiswww.cwru.edu/php/chet/readline/rltop.html
  *          - https://www.geeksforgeeks.org/making-linux-shell-c/
  *          - https://github.com/ehoneahobed/eshell
  *          - https://pubs.opengroup.org/
- * Chat gbt: We used chat gbt to detect errors and get some ideas
+ * Chat gpt: We used chat gpt to detect errors and get some ideas
  */
 
 #include "main.h"
