@@ -18,7 +18,10 @@
 #include <sys/utsname.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <sys/socket.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+#include <netdb.h>
 
 
 char *get_path(char *command);
@@ -28,5 +31,6 @@ int additional_functions(char **argv, int argc, int *command_pid);
 pid_t exec(char **argv);
 void calender(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
-pid_t findreplace(char **argv, int argc);
+void count_word(int argc, char **argv);
+int network_info(int argc, char **argv);
 
