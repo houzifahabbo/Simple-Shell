@@ -1,11 +1,9 @@
-/*************************************************************************************
- *
+/*
  *    File: variables.c
  * Project: system-programming-project-1
  * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
  * Purpose: 
- *
- *************************************************************************************/
+ */
 
 #include "main.h"
 
@@ -22,11 +20,12 @@ char *variables_str[] = {
   "$USER",
   "~",
 };
-char *(*variable) (const char *) = &getenv;
 
+char *(*variable) (const char *) = &getenv;
 const int variables_str_size = sizeof(variables_str) / sizeof(variables_str[0]);
 
-char **replace_variables(char **argv, int argc) {
+char **replace_variables(char **argv, int argc)
+{
     for (int i = 0; i < argc; i++) {
         if (argv[i] != NULL) {
             for (int j = 0; j < variables_str_size; j++) {
