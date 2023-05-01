@@ -12,12 +12,12 @@ const char *additional_functions_str[] = {
   "cd",
   "exit",
   "calc",
-  "calender",
+  "calendar",
   "fileinfo",
   "findreplace",
   "history",
   "count",
-  "network"
+  "networkinfo"
 };
 
 const int additional_functions_str_size = (sizeof(additional_functions_str) / sizeof(additional_functions_str[0]));
@@ -98,10 +98,9 @@ void display_help(char **argv) {
                 break;
             }
         }
-        if (function_index == 0) {
-
-        } else if (function_index == 1) {
-
+        if (function_index == 1) {
+            printf("Eng: write cd path to change the diroctary\n");
+            printf("Tur: cd path yazarak klasor değiştirin\n");
         } else if (function_index == 3) { /* hesapla */
             printf("Eng: Solve arithmetic operations for two number\n");
             printf("Tur: Verilen iki sayinin istenilen aritmetik islemini yapar\n");
@@ -117,101 +116,17 @@ void display_help(char **argv) {
             printf("Eng: To run findreplace code you should write finderplace first_word second_word test.txt\n");
             printf("Tur: findreplace kodu calistirmak icin findreplace ilk_kelime ikinci_kelime test.txt yazmaniz gerekiyor\n");
         } else if (function_index == 7) { /* history */
-            printf("Eng: \n");
-            printf("Tur: \n");
+            printf("Eng: Write history to display all history\nWrite history number so you can add to it or rerun it imeaditly\nNote: when you write history number you can't edit the command");
+            printf("Tur: Tüm geçmişi görüntülemek için 'history' yazın\nGeçmişe bir numara eklemek veya hemen çalıştırmak için numarasını yazın\nNot: Geçmiş numarasını yazdığınızda komutu düzenleyemezsiniz\n");
         } else if (function_index == 8) { /* count */
             printf("Eng: Counting word that occurs in the file\n");
             printf("Tur: Verilen kelimeyi dosyada kac kez ciktigini sayar\n");
             printf("Tur: Calistirmak icin sunu yazin: count <filename> <word>\n");
         } else if (function_index == 9) { /* network */
-            printf("Eng: Shows information about network\n");
-            printf("Tur: Calistirmak icin network yazin\n");
+            printf("Eng: Shows information about networkinfo\n");
+            printf("Tur: Calistirmak icin networkinfo yazin\n");
         }
     }
-}
-
-
-#ifndef NI_MAXHOST
-#define NI_MAXHOST 1025
-#endif
-
-#ifndef NI_NUMERICHOST
-#define NI_NUMERICHOST 2
-#endif
-
-int network_info(int argc, char *argv[]) {
-    struct ifaddrs *ifaddr, *ifa;
-    int family, s;
-    char host[NI_MAXHOST];
-
-    if (getifaddrs(&ifaddr) == -1) {
-        perror("getifaddrs");
-        exit(EXIT_FAILURE);
-    }
-
-    printf("Interface\tAddress\n");
-
-    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
-        if (ifa->ifa_addr == NULL) {
-            continue;
-        }
-
-        family = ifa->ifa_addr->sa_family;
-
-        if (family == AF_INET || family == AF_INET6) {
-            s = getnameinfo(ifa->ifa_addr, (family == AF_INET) ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6),
-                    host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-
-            if (s != 0) {
-                printf("getnameinfo() failed: %s\n", gai_strerror(s));
-                exit(EXIT_FAILURE);
-            }
-
-            printf("%s:\t%s\n", ifa->ifa_name, host);
-        }
-    }
-
-    freeifaddrs(ifaddr);
-    exit(EXIT_SUCCESS);
-}
-
-
-#define MAX_WORD_LEN 100
-
-void count_word(int argc, char *argv[]) {
-    if (argc != 3) {
-        printf("Usage: %s <filename> <word>\n", argv[0]);
-        exit(1);
-    }
-
-    /* First and second word in terminal as filename and word */
-    const char* filename = argv[1];
-    const char* word = argv[2];
-
-    int count = 0;
-    char buffer[MAX_WORD_LEN];
-
-    /* Opening file just for reading */
-    FILE* fp = fopen(filename, "r");
-
-    /* Check for error */
-    if (fp == NULL) {
-        perror("Error opening file");
-        exit(1);
-    }
-
-    /* Counting words */
-    while (fscanf(fp, "%s", buffer) != EOF) {
-        if (strcmp(buffer, word) == 0) {
-            count++;
-        }
-    }
-
-    /* Printing message to shell */
-
-    printf("The word '%s' occurs %d times in '%s'\n", argv[2], count, argv[1]);
-
-    fclose(fp);
 }
 
 /* Function to handle additional functions */
@@ -242,6 +157,12 @@ int additional_functions(char **argv, int argc, int *command_pid) {
                 return 1;
             } else if (i == 7) {
                 return 2;
+            } else if (i == 8) {
+                count_word(argc,argv);
+                return 1;
+            } else if (i == 9) {
+                network_info(argc,argv);
+                return 1;
             }
         }
     }
