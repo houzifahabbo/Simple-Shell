@@ -14,7 +14,7 @@ const char *additional_functions_str[] = {
   "calc",
   "calender",
   "fileinfo",
-  "findreplace"
+  "findreplace",
   "history"
 };
 
@@ -27,135 +27,61 @@ pid_t findreplace(char **argv, int argc)
         printf("Usage: findreplace <search_string> <replacement_string> <input_file>\n");
         return 0;
     }else{
-    pid_t child_pid = fork();
-    if (child_pid == 0) {
+        pid_t child_pid = fork();
+        if (child_pid == 0) {
 
 
-    char *search_string = argv[1];
-    char *replacement_string = argv[2];
-    char *input_file_name = argv[3];
-    FILE *input_file = fopen(input_file_name, "r");
+        char *search_string = argv[1];
+        char *replacement_string = argv[2];
+        char *input_file_name = argv[3];
+        FILE *input_file = fopen(input_file_name, "r");
 
-    if (!input_file) {
-        printf("Error: cannot open input file '%s'\n", input_file_name);
-        return 0;
-    }
-
-    char temp_file_name[] = "temp.txt"; /* geçici olarak açılacak kelimeler değişince silinecek */
-    FILE *temp_file = fopen(temp_file_name, "w");
-
-    if (!temp_file) {
-        printf("Error: cannot open temporary file '%s'\n", temp_file_name);
-        return 0;
-    }
-
-    char line[1000];
-
-    while (fgets(line, 1000, input_file)) {
-        char *pos = strstr(line, search_string);
-
-        while (pos) {
-            int offset = pos - line;
-            memmove(pos + strlen(replacement_string), pos + strlen(search_string), strlen(pos) - strlen(search_string) + 1);
-            memcpy(pos, replacement_string, strlen(replacement_string));
-            pos = strstr(line + offset + strlen(replacement_string), search_string);
+        if (!input_file) {
+            printf("Error: cannot open input file '%s'\n", input_file_name);
+            return 0;
         }
-        fputs(line, temp_file);
-    }
-    fclose(input_file);
-    fclose(temp_file);
 
-    if (remove(input_file_name) != 0) {
-        printf("Error: cannot delete input file '%s'\n", input_file_name);
-        return 0;
-    }
-    if (rename(temp_file_name, input_file_name) != 0) {
-        printf("Error: cannot rename temporary file '%s' to '%s'\n", 
-              temp_file_name, input_file_name);
-        return 0;
-    }
-    exit(0);
-  } else if (child_pid > 0) {
-      waitpid(child_pid, NULL, 0);
-      return child_pid;
-    } else {
-      perror("fork");
-      exit(1);
-    }
-}
+        char temp_file_name[] = "temp.txt"; /* geçici olarak açılacak kelimeler değişince silinecek */
+        FILE *temp_file = fopen(temp_file_name, "w");
 
- 
-int takvim (char **argv)
-{
-    int month = atoi(argv[1]);
-    int year = atoi(argv[2]);
-    int month_d;     /* month_d: days of the month */
-    int week_d = 0;  /* week_d: days of the week */ 
-    char *months[] = {"January", "February", "March",
-                      "April", "May", "June", "July", "August",
-                      "September", "October", "November", "December"};
-
-    /* ayin gunleri hesaplamak */ 
-    /* scanf("%d %d", &month, &year); */
-    switch (month) {
-        case 2:
-            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-                month_d = 29;
-            else
-                month_d = 28;
-            break;
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            month_d = 30;
-            break;
-        default:
-            month_d = 31;
-            break;
-    }
-
-    /* takvimin basligi yazdirmak */
-    printf("\n%s %d\n", months[month - 1], year);
-    printf("Sun Mon Tue Wed Thu Fri Sat\n");
-
-    /* haftanin ilk gununu va ayin hangi gunde basladigini bulmak */
-
-    for (int i = 1; i < year; i++) {
-        if ((i % 4 == 0 && i % 100 != 0) || (i % 400 == 0))
-            week_d = week_d + 366;
-        else
-            week_d = week_d + 365;
-    }
-    for (int i = 1; i < month; i++) {
-        switch (i) {
-            case 2:
-                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-                    week_d = week_d + 29;
-                else
-                    week_d = week_d + 28;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                week_d = week_d + 30;
-                break;
-            default:
-                week_d = week_d + 31;
-                break;
+        if (!temp_file) {
+            printf("Error: cannot open temporary file '%s'\n", temp_file_name);
+            return 0;
         }
-    }
-    week_d = (week_d + 1) % 7;
 
-    for (int i = 0; i < week_d; i++) {
-      printf("    ");
-    }
+        char line[1000];
 
-    for (int i = 1; i <= month_d; i++) {
-        printf("%3d ", i);
-        if ((i + week_d) % 7 == 0 || i == month_d)
-            printf("\n");
+        while (fgets(line, 1000, input_file)) {
+            char *pos = strstr(line, search_string);
+
+            while (pos) {
+                int offset = pos - line;
+                memmove(pos + strlen(replacement_string), pos + strlen(search_string), strlen(pos) - strlen(search_string) + 1);
+                memcpy(pos, replacement_string, strlen(replacement_string));
+                pos = strstr(line + offset + strlen(replacement_string), search_string);
+            }
+            fputs(line, temp_file);
+        }
+        fclose(input_file);
+        fclose(temp_file);
+
+        if (remove(input_file_name) != 0) {
+            printf("Error: cannot delete input file '%s'\n", input_file_name);
+            return 0;
+        }
+        if (rename(temp_file_name, input_file_name) != 0) {
+            printf("Error: cannot rename temporary file '%s' to '%s'\n", 
+                temp_file_name, input_file_name);
+            return 0;
+        }
+        exit(0);
+        } else if (child_pid > 0) {
+            waitpid(child_pid, NULL, 0);
+            return child_pid;
+        } else {
+            perror("fork");
+            exit(1);
+        }
     }
 }
 
@@ -226,48 +152,55 @@ void cd(char **argv)
 
 void help(char **argv)
 {
-    int function_index = 0;
-    for (int i = 0; i < additional_functions_str_size; i++)
-        if (strcmp(argv[1], additional_functions_str[i]) == 0) {
-            function_index = i + 1;
-            break;
-        }
-    switch (function_index) {
-        case 1:    /* help */
-            break;
-        case 2:    /* cd */
-            break;
-        case 3:
-            break;
-        case 4:    /* hesapla */      
-            printf("Solve arithmetic operations for two number\n");
-            printf("Verilen iki sayinin istenilen aritmetik islemini yapar\n");
-            break;
-        case 5:     /* takvim */          
-            printf("Gives the calendar for the month in the given year\n");
-            printf("Verilen yildaki ayin takvimini verir\n");
-            break;
-        case 6:   /* file_info */    
-            printf("Gives the infomation of the given file\n");
-            printf("Veilen dosyanin bilgilerini verir\n");
-            break;    
-        case 7:   /* findreplace */  
-            printf("Replace the first given word with the second word\n ");
-            printf("Verilen ilk kelimeyi ikinci kelime ile degistirir\n");
-            break;   
-        default:
-            printf("Type program names and arguments, and hit enter\n");
+    if(argv[1] == NULL){
+        printf("Type program names and arguments, and hit enter\n");
             printf("The following are built in:\n");
 
             for (int i = 0; i < additional_functions_str_size; i++)
                 printf("  %s\n", additional_functions_str[i]);
 
             printf("Use the man command for information on other programs.\n");
-            break;
+    }else{
+        int function_index = -1;
+        for (int i = 0; i < additional_functions_str_size; i++)
+            if (strcmp(argv[1], additional_functions_str[i]) == 0) {
+                function_index = i;
+                break;
+            }
+        switch (function_index) {
+            case 0:    /* help */
+                break;
+            case 1:    /* cd */
+                break;
+            case 2:
+                break;
+            case 3:    /* hesapla */      
+                printf("Solve arithmetic operations for two number\n");
+                printf("Verilen iki sayinin istenilen aritmetik islemini yapar\n");
+                break;
+            case 4:     /* calender */          
+                printf("Gives the calendar for the month in the given year\n");
+                printf("Verilen yildaki ayin takvimini verir\n");
+                break;
+            case 5:   /* file_info */    
+                printf("Gives the infomation of the given file\n");
+                printf("Veilen dosyanin bilgilerini verir\n");
+                break;    
+            case 6:   /* findreplace */  
+                printf("Replace the first given word with the second word\n ");
+                printf("Verilen ilk kelimeyi ikinci kelime ile degistirir\n");
+                break;   
+            case 7:
+                printf("sgsdg\n");
+                printf("dsgsdg\n");
+                break;  
+            default:
+                break;
+        }
     }
 }
 
-int additional_functions(char **argv, int argc, int *command_pid,char ** history_str,int history_str_size) {
+int additional_functions(char **argv, int argc, int *command_pid) {
     int function_index = -1;
     for (int i = 0; i < additional_functions_str_size; i++)
         if (strcmp(argv[0], additional_functions_str[i]) == 0) {
@@ -276,26 +209,28 @@ int additional_functions(char **argv, int argc, int *command_pid,char ** history
         }
     *command_pid = getpid();
     switch (function_index) {
-        case 1:
+        case 0:
             help(argv);
             return 1;
-        case 2:
+        case 1:
             cd(argv);
             return 1;
-        case 3:
-            return 2;
-         case 4:
+        case 2:
+            return 3;
+         case 3:
             hesapla(argv);
             return 1;
-        case 5:
-            takvim(argv);
+        case 4:
+            calender(argv);
             return 1;
-        case 6:
+        case 5:
             file_info(argv);
             return 1;    
-        case 7:  
+        case 6:  
             findreplace(argv,argc);
-            return 1;   
+            return 1;
+        case 7:
+            return 2;  
         default:
             break;
     }

@@ -48,6 +48,7 @@ char* prompt(){
             getenv("USER"), cwd);
     return strdup(prompt);
 }
+
 char* history(char **argv, char **history_str, int history_str_size) {
     if (argv[1] == NULL) {
         for (int i = 0; i < history_str_size; i++) {
@@ -66,48 +67,19 @@ char* history(char **argv, char **history_str, int history_str_size) {
         }
     }
     return NULL;
-
-void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index){
-    char buffer[INBUF_SIZE] = {'\0'};
-    size_t buffer_length = strlen(buffer);
-    int bytes_written,remaining_space = MY_FILE_SIZE - strlen(addr) - 1;
-    pid_t pid = getpid(),parent_pid = getppid();
-    time_t current_time = time(NULL);
-    char *start_time = ctime(&current_time);
-    struct tm *timeinfo = localtime(&current_time);
-    char formated_start_time[80];
-    strftime(formated_start_time, sizeof(formated_start_time), "%d-%m-%Y %H:%M:%S", timeinfo);
-    if(flag == 1)
-        bytes_written = snprintf(buffer, INBUF_SIZE, "Process ID: %d\tParent Process ID: %d\tStart Time: %s\n", pid, parent_pid,formated_start_time);
-    else if(flag == 2)
-        bytes_written = snprintf(buffer, INBUF_SIZE, "\nProcess ID: %d\tParent Process ID: %d\tEnd Time: %s\n",pid, parent_pid,formated_start_time);
-    else{
-        bytes_written = snprintf(buffer, INBUF_SIZE, "Process ID: %d\tCommand Process ID: %d\t", pid,*command_pid);
-        for (int i = 0; i < argc; i++)
-        {
-            size_t message_length = strlen(message[i]);
-            strncat(buffer, message[i], INBUF_SIZE - buffer_length - 1);
-            strncat(buffer, " ", INBUF_SIZE - buffer_length - message_length - 1);
-        }
-        strcat(buffer,"\n");
-    }
-
-    if (bytes_written >= remaining_space) {
-        fprintf(stderr, "Log message exceeds shared memory size. Unable to write.\n");
-        return;
-    }
-    strncat(&addr[index], buffer, remaining_space);
 }
+
 
 int main(int argc, char **argv)
 {
     char *inbuf;
-    int i=0,flag=0;
     char *history_str[10]={"null","null","null","null","null","null","null","null","null","null"};
+    int i=0;
+    int flag=0;
     int history_str_size = sizeof(history_str)/sizeof(history_str[0]);
     pid_t command_pid = getpid();
     initmem();
-    log_message(NULL,&command_pid,1,argc,i);
+    log_message(NULL,&command_pid,1,argc,i,addr);
     while (1)
     {
         command_pid = getpid();
@@ -144,15 +116,15 @@ int main(int argc, char **argv)
 
         if (x == 0)
             command_pid = exec(argv);
-        else if(x==2){
+        else if(x == 2){
             flag = 1;
             continue;
-        }else if(x==3){
-            log_message(argv,&command_pid,2,argc,i);
+        }else if(x == 3){
+            log_message(argv,&command_pid,2,argc,i,addr);
             free(argv);
             break;
         }
-        log_message(argv,&command_pid,0,argc,i);
+        log_message(argv,&command_pid,0,argc,i,addr);
         if(i==10)
             i=0;
         else
