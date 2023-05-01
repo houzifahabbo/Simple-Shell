@@ -131,8 +131,6 @@ void display_help(char **argv) {
 
 /* Function to handle additional functions */
 int additional_functions(char **argv, int argc, int *command_pid) {
-    *command_pid = getpid();
-
     for (int i = 0; i < additional_functions_str_size; i++) {
         if (strcmp(argv[0], additional_functions_str[i]) == 0) {
             if (i == 0) {
@@ -153,12 +151,12 @@ int additional_functions(char **argv, int argc, int *command_pid) {
                 file_info(argv);
                 return 1;
             } else if (i == 6) {
-                find_replace(argv, argc);
+                *command_pid = find_replace(argv, argc);
                 return 1;
             } else if (i == 7) {
                 return 2;
             } else if (i == 8) {
-                count_word(argc,argv);
+                *command_pid = count_word(argc,argv);
                 return 1;
             } else if (i == 9) {
                 network_info(argc,argv);

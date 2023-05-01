@@ -4,6 +4,12 @@
  * Authors: Houzifa Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: Implements a single-shell command-line interface
  * Note: I used readline library just for handling navigation, command history, and code completion
+ * Sources: 
+ *          - https://tiswww.cwru.edu/php/chet/readline/rltop.html
+ *          - https://www.geeksforgeeks.org/making-linux-shell-c/
+ *          - https://github.com/ehoneahobed/eshell
+ *          - https://pubs.opengroup.org/
+ * Chat gbt: We used chat gbt to detect errors and get some ideas
  */
 
 #include "main.h"
@@ -92,7 +98,7 @@ int main(int argc, char **argv)
     int history_index = 0;
                               
     int history_str_size = sizeof(history_str) / sizeof(history_str[0]);
-    pid_t command_pid;
+    pid_t command_pid = getpid();
     
     initmem();
     log_message(NULL, &command_pid, 1, argc, index, addr);

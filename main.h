@@ -31,7 +31,7 @@ int additional_functions(char **argv, int argc, int *command_pid);
 pid_t exec(char **argv);
 void calendar(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
-void count_word(int argc, char **argv);
+pid_t count_word(int argc, char **argv);
 void network_info(int argc, char **argv);
 pid_t find_replace(char **argv, int argc);
 
