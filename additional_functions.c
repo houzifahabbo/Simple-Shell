@@ -16,7 +16,8 @@ const char *additional_functions_str[] = {
   "fileinfo",
   "findreplace",
   "history",
-  "count"
+  "count",
+  "network"
 };
 
 const int additional_functions_str_size = (sizeof(additional_functions_str) / sizeof(additional_functions_str[0]));
