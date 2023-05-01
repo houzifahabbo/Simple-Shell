@@ -111,29 +111,32 @@ void help(char **argv)
             case 2:
                 break;
             case 3:    /* hesapla */      
-                printf("Solve arithmetic operations for two number\n");
-                printf("Verilen iki sayinin istenilen aritmetik islemini yapar\n");
+                printf("Eng: Solve arithmetic operations for two number\n");
+                printf("Tur: Verilen iki sayinin istenilen aritmetik islemini yapar\n");
                 break;
             case 4:     /* calendar */          
-                printf("Gives the calendar for the month in the given year\n");
-                printf("Verilen yildaki ayin takvimini verir\n");
+                printf("Eng: Gives the calendar for the month in the given year\n");
+                printf("Tur: Verilen yildaki ayin takvimini verir\n");
                 break;
             case 5:   /* file_info */    
-                printf("Gives the infomation of the given file\n");
-                printf("Verilen dosyanin bilgilerini verir\n");
+                printf("Eng: Gives the infomation of the given file\n");
+                printf("Tur: Verilen dosyanin bilgilerini verir\n");
                 break;    
             case 6:   /* findreplace */  
-                printf("Replace the first given word with the second word\n ");
-                printf("Verilen ilk kelimeyi ikinci kelime ile degistirir\n");
+                printf("Eng: Replace the first given word with the second word\n ");
+                printf("Tur: Verilen ilk kelimeyi ikinci kelime ile degistirir\n\n");
+                printf("Eng: To run findreplace code you should write finderplace first_word second_word test.txt in terminal\n");
+                printf("Tur: findreplace kodu calistirmak icin findreplace ilk_kelime ikinci_kelime test.txt terminalda yazman gerekiyor\n");
+
                 break;   
             case 7:
                 printf("sgsdg\n");
                 printf("dsgsdg\n");
                 break;
             case 8:   /* count */
-                printf("Counting word that occurs in the file\n");
-                printf("Verilen kelimeyi dosyada kac kez ciktigini sayar\n");
-                printf("Calistirmak icin sunu yazin: count <filename> <word> ");
+                printf("Eng: Counting word that occurs in the file\n");
+                printf("Tur: Verilen kelimeyi dosyada kac kez ciktigini sayar\n");
+                printf("Tur: Calistirmak icin sunu yazin: count <filename> <word> ");
                 break;
             case 9:   /* network */
                 printf("Shows information about network\n");
