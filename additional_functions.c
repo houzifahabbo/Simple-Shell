@@ -114,8 +114,8 @@ void display_help(char **argv) {
         } else if (function_index == 5) { /* file_info */
             printf("Eng: Gives the information of the given file\n");
             printf("Tur: Verilen dosyanin bilgilerini verir\n");
-                printf("calistirmak icin fileinfo sonra bligilarini ogrenmek istediginiz dosyanin bilgilerini yaziniz\n");
-                printf("ornek : fileinfo test.txt\n");
+            printf("calistirmak icin fileinfo sonra bligilarini ogrenmek istediginiz dosyanin bilgilerini yaziniz\n");
+            printf("ornek : fileinfo test.txt\n");
         } else if (function_index == 6) { /* findreplace */
             printf("Eng: Replace the first given word with the second word\n ");
             printf("Tur: Verilen ilk kelimeyi ikinci kelime ile degistirir\n\n");
