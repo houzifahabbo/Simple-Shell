@@ -7,7 +7,8 @@
 #include "main.h"
 #define MAX_WORD_LEN 100
 
-pid_t count_word(int argc, char *argv[]) {
+pid_t count_word(int argc, char *argv[]) 
+{
     if (argc != 3) {
         printf("Usage: %s <filename> <word>\n", argv[0]);
         exit(1);

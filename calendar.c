@@ -12,7 +12,8 @@ int isLeapYear(int year)
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-void calendar(char **argv) {
+void calendar(char **argv) 
+{
 
     /* ay veya yil girmediyse uyari mesaji vermek icin */ 
      if (argv[1] == NULL || argv[2] == NULL) {
@@ -64,5 +65,5 @@ void calendar(char **argv) {
             printf("\n");
         }
      }
-    } 
+} 
 
