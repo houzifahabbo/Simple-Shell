@@ -4,7 +4,7 @@ int isLeapYear(int year) {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-void calender(char **argv) {
+void calendar(char **argv) {
     int month = atoi(argv[1]);
     int year = atoi(argv[2]);
     int month_d = 0;     /* month_d: days of the month */

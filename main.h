@@ -19,13 +19,11 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
-
 char *get_path(char *command);
 char **split_string(char *input, char **argv, int *argc);
 char **replace_variables(char **argv, int argc);
 int additional_functions(char **argv, int argc, int *command_pid);
 pid_t exec(char **argv);
-void calender(char **argv);
+void calendar(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
 
