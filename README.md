@@ -1,9 +1,21 @@
 if you want to run the code
-fisrt you have to compile it by typing:
+fisrt you have to install readline library:
 ```
-gcc singleshell.c exec.c get_path.c split_string.c additional_functions.c variables.c
+sudo apt-get install libreadline-dev
+```
+then compile it by typing:
+```
+gcc !(multishell).c -o singleshell -lreadline
 ```
 then run it by typing:
 ```
-./a.out
+./singleshell
+```
+to compile multishell:
+```
+gcc multishell.c -o multishell
+```
+then run it by typing:
+```
+./multishell 
 ```

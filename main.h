@@ -11,9 +11,12 @@
 #include <time.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 
 char *get_path(char * command);
 char **split_string(char* input, char ** argv ,int *argc);
 pid_t exec(char **argv);
-int additional_functions(char** argv , int argc,int * command_pid);
+int additional_functions(char** argv, int argc, int * command_pid,char ** history_str,int history_str_size);
 char ** replace_variables(char **argv,int argc);
