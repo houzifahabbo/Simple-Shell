@@ -11,7 +11,12 @@ then run it by typing:
 ```
 ./singleshell
 ```
-to compile multishell:
+io order to compile multishell you have to install xterm by using this command:
+```
+sudo apt-get install xterm
+
+```
+then compile it:
 ```
 gcc multishell.c -o multishell
 ```
