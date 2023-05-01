@@ -4,7 +4,7 @@ pid_t findreplace(char **argv, int argc)
 {
   
     if (argc != 4) {
-        printf("Usage: findreplace <search_string> <replacement_string> <input_file>\n");
+        printf("Error: Yanlis bisey yazdin kodu dogru calismasi icin help findreplace ten ogrenebilirsiniz. \n");
         return 0;
         /*Girdi parametre sayisinin dogru olup olmadigini kontrol ediyor. 
         Eger dogru degilse, kullaniciya dogru kullanimi gosterilerek fonksiyondan cikiyor*/
@@ -23,9 +23,9 @@ pid_t findreplace(char **argv, int argc)
             return 0;
         }
 
-        char temp_file_name[] = "temp.txt"; /* gecici olarak acılacak kelimeler degisince silinecek */
+        char temp_file_name[] = "temp.txt"; 
         FILE *temp_file = fopen(temp_file_name, "w");
-
+        /* gecici olarak acılacak kelimeler degisince silinecek */
         if (!temp_file) {
             printf("Error: cannot open temporary file '%s'\n", temp_file_name);
             return 0;

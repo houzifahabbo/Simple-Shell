@@ -112,20 +112,22 @@ void help(char **argv)
             case 2:
                 break;
             case 3:    /* hesapla */      
-                printf("Solve arithmetic operations for two number\n");
-                printf("Verilen iki sayinin istenilen aritmetik islemini yapar\n");
+                printf("Eng: Solve arithmetic operations for two number\n");
+                printf("Tur: Verilen iki sayinin istenilen aritmetik islemini yapar\n");
                 break;
             case 4:     /* calender */          
-                printf("Gives the calendar for the month in the given year\n");
-                printf("Verilen yildaki ayin takvimini verir\n");
+                printf("Eng: Gives the calendar for the month in the given year\n");
+                printf("Tur: Verilen yildaki ayin takvimini verir\n");
                 break;
             case 5:   /* file_info */    
-                printf("Gives the infomation of the given file\n");
-                printf("Veilen dosyanin bilgilerini verir\n");
+                printf("Eng: Gives the infomation of the given file\n");
+                printf("Tur: Veilen dosyanin bilgilerini verir\n");
                 break;    
             case 6:   /* findreplace */  
-                printf("Replace the first given word with the second word\n ");
-                printf("Verilen ilk kelimeyi ikinci kelime ile degistirir\n");
+                printf("Eng: Replace the first given word with the second word\n ");
+                printf("Tur: Verilen ilk_kelimeyi ikinci_kelime ile degistirir\n\n");
+                printf("Eng: To run this code you, you should write findreplace first_word second_word test.txt\n");
+                printf("Tur: Kodu calistirmak icin findreplace ilk_kelime ikinci_kelime test.txt yazman gerekiyor.\n");
                 break;   
             case 7:
                 printf("sgsdg\n");

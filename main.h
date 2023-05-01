@@ -28,4 +28,5 @@ int additional_functions(char **argv, int argc, int *command_pid);
 pid_t exec(char **argv);
 void calender(char **argv);
 void log_message(char **message,pid_t * command_pid ,int flag,int argc,int index ,char * addr);
+pid_t findreplace(char **argv, int argc);
 
