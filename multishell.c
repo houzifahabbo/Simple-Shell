@@ -102,9 +102,9 @@ int main(int argc, char **argv)
         save_to_file(); /* Save the shared memory content to a file */
     }
 
-    munmap(addr, 1024); // Unlink the mapped memory
+    munmap(addr, 1024); /* Unlink the mapped memory */
 
-    close(fd); // Close the shared memory file
+    close(fd); /* Close the shared memory file */
 
     return 0;
 }
