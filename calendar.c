@@ -12,8 +12,14 @@ int isLeapYear(int year)
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-void calendar(char **argv) 
-{
+void calendar(char **argv) {
+
+    /* ay veya yil girmediyse uyari mesaji vermek icin */ 
+     if (argv[1] == NULL || argv[2] == NULL) {
+    printf("Please add month and year.\n");
+    return;
+   }
+   else{
     int month = atoi(argv[1]);
     int year = atoi(argv[2]);
     int month_d = 0;     /* month_d: days of the month */
@@ -56,6 +62,7 @@ void calendar(char **argv)
         printf("%3d ", i);
         if ((i + startingDay) % 7 == 0 || i == month_d) 
             printf("\n");
-        
-    }
-}
+        }
+     }
+    } 
+

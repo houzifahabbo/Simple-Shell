@@ -21,5 +21,5 @@ gcc multishell.c -o multishell
 ```
 then run it by typing:
 ```
-./multishell 
+./multishell
 ```
