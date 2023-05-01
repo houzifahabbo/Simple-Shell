@@ -1,7 +1,7 @@
 /*
  *    File: additional_functions.c
  * Project: system-programming-project-1
- * Authors: Hozaifah Habbo, Ola Helany, Nour Chami, Muslim Umalatov
+ * Authors: Hozaifah Habbo, Ola Helani, Nour Chami, Muslim Umalatov
  * Purpose: 
  */
 
@@ -20,71 +20,6 @@ const char *additional_functions_str[] = {
 };
 
 const int additional_functions_str_size = (sizeof(additional_functions_str) / sizeof(additional_functions_str[0]));
-
-pid_t findreplace(char **argv, int argc)
-{
-  
-    if (argc != 4) {
-        printf("Usage: findreplace <search_string> <replacement_string> <input_file>\n");
-        return 0;
-    }else{
-        pid_t child_pid = fork();
-        if (child_pid == 0) {
-
-
-        char *search_string = argv[1];
-        char *replacement_string = argv[2];
-        char *input_file_name = argv[3];
-        FILE *input_file = fopen(input_file_name, "r");
-
-        if (!input_file) {
-            printf("Error: cannot open input file '%s'\n", input_file_name);
-            return 0;
-        }
-
-        char temp_file_name[] = "temp.txt"; /* geçici olarak açılacak kelimeler değişince silinecek */
-        FILE *temp_file = fopen(temp_file_name, "w");
-
-        if (!temp_file) {
-            printf("Error: cannot open temporary file '%s'\n", temp_file_name);
-            return 0;
-        }
-
-        char line[1000];
-
-        while (fgets(line, 1000, input_file)) {
-            char *pos = strstr(line, search_string);
-
-            while (pos) {
-                int offset = pos - line;
-                memmove(pos + strlen(replacement_string), pos + strlen(search_string), strlen(pos) - strlen(search_string) + 1);
-                memcpy(pos, replacement_string, strlen(replacement_string));
-                pos = strstr(line + offset + strlen(replacement_string), search_string);
-            }
-            fputs(line, temp_file);
-        }
-        fclose(input_file);
-        fclose(temp_file);
-
-        if (remove(input_file_name) != 0) {
-            printf("Error: cannot delete input file '%s'\n", input_file_name);
-            return 0;
-        }
-        if (rename(temp_file_name, input_file_name) != 0) {
-            printf("Error: cannot rename temporary file '%s' to '%s'\n", 
-                temp_file_name, input_file_name);
-            return 0;
-        }
-        exit(0);
-        } else if (child_pid > 0) {
-            waitpid(child_pid, NULL, 0);
-            return child_pid;
-        } else {
-            perror("fork");
-            exit(1);
-        }
-    }
-}
 
 
 /* file info */  
