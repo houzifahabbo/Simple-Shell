@@ -1,0 +1,10 @@
+Process ID: 50258	Parent Process ID: 50256	Start Time: 01-05-2023 22:43:31
+Process ID: 50259	Parent Process ID: 50257	Start Time: 01-05-2023 22:43:31
+Process ID: 50259	Command Process ID: 50259	cd 
+Process ID: 50259	Command Process ID: 50451	ls /home/nour 
+Process ID: 50259	Command Process ID: 50454	ls /home/nour - 
+Process ID: 50259	Command Process ID: 50259	help 
+Process ID: 50259	Command Process ID: 50259	help calc 
+Process ID: 50259	Command Process ID: 50259	calendar 4 2023 
+Process ID: 50259	Command Process ID: 50259	fileinfo test.txt 
+Process ID: 50258	Command Process ID: 50258	help 
